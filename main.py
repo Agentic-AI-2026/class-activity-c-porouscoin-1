@@ -7,16 +7,16 @@ import nest_asyncio
 nest_asyncio.apply()
 
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_mcp_adapters.client import MultiServerMCPClient
 
 from graph import AgentState, REACT_SYSTEM, build_graph
 
 # ─── LLM ──────────────────────────────────────────────────────────────────────
-# Set GOOGLE_API_KEY in your environment (or replace with your preferred LLM).
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.0-flash",
-    google_api_key=os.environ.get("GOOGLE_API_KEY", ""),
+# Set GROQ_API_KEY in your environment before running.
+llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    api_key=os.environ.get("GROQ_API_KEY", ""),
     temperature=0,
 )
 
