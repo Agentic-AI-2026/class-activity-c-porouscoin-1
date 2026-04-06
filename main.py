@@ -24,16 +24,21 @@ llm = ChatGroq(
 # math + search run as local subprocesses; weather must already be running on 8000
 TOOLS_DIR = os.path.join(os.path.dirname(__file__), "Tools")
 
+# Pass full environment to subprocesses so API keys are available
+_ENV = dict(os.environ)
+
 MCP_CONFIG = {
     "math": {
         "command": sys.executable,
         "args": [os.path.join(TOOLS_DIR, "math_server.py")],
         "transport": "stdio",
+        "env": _ENV,
     },
     "search": {
         "command": sys.executable,
         "args": [os.path.join(TOOLS_DIR, "search_server.py")],
         "transport": "stdio",
+        "env": _ENV,
     },
     "weather": {
         "url": "http://localhost:8000/mcp",
